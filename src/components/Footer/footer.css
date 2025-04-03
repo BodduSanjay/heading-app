@@ -1,0 +1,97 @@
+/* Footer Styles */
+.footer {
+  background: #222;
+  color: white;
+  padding: 15px 50px;
+  box-sizing: border-box;
+  text-align: center;
+  border-top: 1px solid gray;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+  margin: 10px;
+}
+
+.footer-section h2,
+.footer-section h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #f0a500;
+}
+
+.footer-section p,
+.footer-section ul {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+  color: #f0a500;
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+}
+
+.social-icons a:hover {
+  color: #f0a500;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  margin-top: 20px;
+  border-top: 1px solid #555;
+  padding-top: 15px;
+  font-size: 0.85rem;
+  color: #bbb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer {
+    padding: 15px 20px;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
