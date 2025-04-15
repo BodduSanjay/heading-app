@@ -8,12 +8,14 @@ import { TbRecycle } from "react-icons/tb";
 
 const LandingPage = () => {
   const [heading, setHeading] = useState("");
+  const [backendId, setBackend] = useState(0);
   const [editable, setEditable] = useState(false);
   const [inputValue, setInputValue] = useState(heading);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isChanged, setIsChanged] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [name, setName] = useState("");
 
   useEffect(() => {
     const fetchHeading = async () => {
@@ -24,6 +26,7 @@ const LandingPage = () => {
           throw new Error("Failed to fetch the heading please try again");
         }
         setHeading(data.text);
+        setBackend(data.id);
         setInputValue(data.text);
       } catch (error) {
         console.error(error);
@@ -49,12 +52,14 @@ const LandingPage = () => {
     }
     try {
       setIsLoading(true);
+      const id = backendId !== null || backendId !== undefined ? backendId : 0;
+
       const options = {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: 1, text: inputValue }),
+        body: JSON.stringify({ id, text: inputValue }),
       };
 
       const response = await fetch(
@@ -131,70 +136,105 @@ const LandingPage = () => {
         <div className="key-features">
           <h2>Our Key Features</h2>
           <div className="features-grid">
-            <div className="detls-cont">
-              <div className="icon-div-cont">
-                <FaAnglesRight />
+            {(name === "firstEl" || name === "") && (
+              <div className="detls-cont">
+                <div className="icon-div-cont">
+                  <FaAnglesRight />
+                </div>
+                <h3>Ready to Go Algos</h3>
+                <p>
+                  We have ready accelerators embedded with learnings from
+                  hundreds of past projects, generating actionable results.
+                </p>
               </div>
-              <h3>Ready to Go Algos</h3>
-              <p>
-                We have ready accelerators embedded with learnings from hundreds
-                of past projects, generating actionable results.
-              </p>
-            </div>
-            <div className="detls-cont">
-              <div className="icon-div-cont">
-                <RiBox1Line />
+            )}
+            {(name === "secondEl" || name === "") && (
+              <div className="detls-cont">
+                <div className="icon-div-cont">
+                  <RiBox1Line />
+                </div>
+                <h3>Internal Capability Building</h3>
+                <p>
+                  We productize all our work, enhance them with the latest AI
+                  technology, and train your internal teams to leverage them.
+                </p>
               </div>
-              <h3>Internal Capability Building</h3>
-              <p>
-                We productize all our work, enhance them with the latest AI
-                technology, and train your internal teams to leverage them.
-              </p>
-            </div>
+            )}
           </div>
         </div>
 
         {/* Timeline */}
         <div className="timeline">
-          <div className="timeline-point"></div>
-          <div className="timeline-point"></div>
-          <div className="timeline-point"></div>
-          <div className="timeline-point"></div>
-          <div className="timeline-point"></div>
+          <div
+            className={`timeline-point ${
+              name === "firstEl" ? "big-circle" : ""
+            }`}
+            onClick={() => setName("firstEl")}
+          ></div>
+          <div
+            className={`timeline-point ${
+              name === "secondEl" ? "big-circle" : ""
+            }`}
+            onClick={() => setName("secondEl")}
+          ></div>
+          <div
+            className={`timeline-point ${
+              name === "thirdEl" ? "big-circle" : ""
+            }`}
+            onClick={() => setName("thirdEl")}
+          ></div>
+          <div
+            className={`timeline-point ${
+              name === "fourthEl" ? "big-circle" : ""
+            }`}
+            onClick={() => setName("fourthEl")}
+          ></div>
+          <div
+            className={`timeline-point ${
+              name === "fifthhEl" ? "big-circle" : ""
+            }`}
+            onClick={() => setName("fifthhEl")}
+          ></div>
         </div>
 
         {/* Additional Features */}
         <div className="additional-features">
-          <div className="detls-cont">
-            <div className="icon-div-cont">
-              <FaDatabase />
+          {(name === "thirdEl" || name === "") && (
+            <div className="detls-cont">
+              <div className="icon-div-cont">
+                <FaDatabase />
+              </div>
+              <h3>Multi-source data</h3>
+              <p>
+                Our solutions work with old, new, or incomplete datasets, in
+                different formats, and from varied sources.
+              </p>
             </div>
-            <h3>Multi-source data</h3>
-            <p>
-              Our solutions work with old, new, or incomplete datasets, in
-              different formats, and from varied sources.
-            </p>
-          </div>
-          <div className="detls-cont">
-            <div className="icon-div-cont">
-              <FaSuitcase />
+          )}
+          {(name === "fourthEl" || name === "") && (
+            <div className="detls-cont">
+              <div className="icon-div-cont">
+                <FaSuitcase />
+              </div>
+              <h3>Stakeholder Alignment</h3>
+              <p>
+                No black boxes. Stakeholders understand the "how," "so what,"
+                and "now what," leading to clear decision-making trade-offs.
+              </p>
             </div>
-            <h3>Stakeholder Alignment</h3>
-            <p>
-              No black boxes. Stakeholders understand the "how," "so what," and
-              "now what," leading to clear decision-making trade-offs.
-            </p>
-          </div>
-          <div className="detls-cont">
-            <div className="icon-div-cont">
-              <TbRecycle />
+          )}
+          {(name === "fifthhEl" || name === "") && (
+            <div className="detls-cont">
+              <div className="icon-div-cont">
+                <TbRecycle />
+              </div>
+              <h3>Continuous Engagement</h3>
+              <p>
+                We engage in the long-term to enhance, course-correct, and adopt
+                new models to continuously refine your work.
+              </p>
             </div>
-            <h3>Continuous Engagement</h3>
-            <p>
-              We engage in the long-term to enhance, course-correct, and adopt
-              new models to continuously refine your work.
-            </p>
-          </div>
+          )}
         </div>
       </section>
       {showPopup && (
